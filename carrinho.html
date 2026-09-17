@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PetLove | Carrinho</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        :root {
+            --orange: #ff7a3d;
+            --orange-dark: #ef5d22;
+            --blue: #4263eb;
+            --green: #39b879;
+            --dark: #20252b;
+            --light: #f7f8fc;
+        }
+
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        /* ==========================
+           NAVBAR
+        ========================== */
+
+        .navbar {
+            background: rgba(255,255,255,.96);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 3px 20px rgba(0,0,0,.06);
+        }
+
+        .navbar-brand {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: var(--orange);
+        }
+
+        .navbar-brand span {
+            color: var(--blue);
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: #555;
+            margin-left: 20px;
+        }
+
+        .nav-link:hover {
+            color: var(--orange);
+        }
+
+        /* ==========================
+           HEADER
+        ========================== */
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-header small {
+            color: var(--orange);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .page-header h1 {
+            font-size: clamp(2.3rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-top: 8px;
+        }
+
+        .page-header p {
+            color: #777;
+        }
+
+        /* ==========================
+           CART
+        ========================== */
+
+        .cart-box {
+            background: white;
+            border-radius: 25px;
+            padding: 25px;
+            border: 1px solid #eee;
+            box-shadow: 0 10px 30px rgba(0,0,0,.06);
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-image {
+            width: 100px;
+            height: 100px;
+            flex-shrink: 0;
+            border-radius: 18px;
+            overflow: hidden;
+        }
+
+        .cart-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cart-info {
+            flex: 1;
+        }
+
+        .cart-info h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .cart-info p {
+            color: #888;
+            font-size: .85rem;
+            margin-bottom: 10px;
+        }
+
+        .cart-price {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--orange);
+        }
+
+        /* ==========================
+           QUANTITY
+        ========================== */
+
+        .quantity {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+        .quantity button {
+            width: 35px;
+            height: 35px;
+            border: none;
+            background: white;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .quantity button:hover {
+            background: #f1f1f1;
+        }
+
+        .quantity span {
+            width: 35px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .remove-btn {
+            border: none;
+            background: transparent;
+            color: #aaa;
+            font-size: 1.2rem;
+            transition: .3s;
+        }
+
+        .remove-btn:hover {
+            color: #dc3545;
+        }
+
+        /* ==========================
+           SUMMARY
+        ========================== */
+
+        .summary {
+            background: white;
+            border-radius: 25px;
+            padding: 30px;
+            border: 1px solid #eee;
+            box-shadow: 0 10px 30px rgba(0,0,0,.06);
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary h2 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+        }
+
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            margin-top: 20px;
+            font-size: 1.25rem;
+            font-weight: 800;
+        }
+
+        .summary-total span:last-child {
+            color: var(--orange);
+        }
+
+        .checkout-btn {
+            width: 100%;
+            border: none;
+            border-radius: 50px;
+            padding: 14px;
+            background: var(--orange);
+            color: white;
+            font-weight: 700;
+            margin-top: 20px;
+            transition: .3s;
+        }
+
+        .checkout-btn:hover {
+            background: var(--orange-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(239,93,34,.3);
+        }
+
+        .continue-btn {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: var(--blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .continue-btn:hover {
+            color: var(--orange);
+        }
+
+        /* ==========================
+           EMPTY CART
+        ========================== */
+
+        .empty-cart {
+            text-align: center;
+            padding: 70px 30px;
+        }
+
+        .empty-cart i {
+            font-size: 4rem;
+            color: #ddd;
+        }
+
+        .empty-cart h2 {
+            font-weight: 800;
+            margin-top: 20px;
+        }
+
+        .empty-cart p {
+            color: #888;
+        }
+
+        /* ==========================
+           FOOTER
+        ========================== */
+
+        footer {
+            margin-top: 70px;
+            padding: 45px 0;
+            background: #20252b;
+            color: #bbb;
+        }
+
+        footer strong {
+            color: var(--orange);
+        }
+
+        footer a {
+            color: #bbb;
+            text-decoration: none;
+            transition: .3s;
+        }
+
+        footer a:hover {
+            color: var(--orange);
+        }
+
+        .footer-title {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,.08);
+            border-radius: 50%;
+            margin: 4px;
+            transition: .3s;
+        }
+
+        .social-icon:hover {
+            background: var(--orange);
+            color: white;
+        }
+
+        /* ==========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 768px) {
+
+            .cart-item {
+                flex-wrap: wrap;
+            }
+
+            .cart-image {
+                width: 80px;
+                height: 80px;
+            }
+
+            .cart-info {
+                min-width: calc(100% - 110px);
+            }
+
+            .quantity {
+                margin-left: 100px;
+            }
+
+            .summary {
+                position: static;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================
+     NAVBAR
+===================================== -->
+
+<nav class="navbar navbar-expand-lg sticky-top">
+
+    <div class="container">
+
+        <a class="navbar-brand" href="index.html">
+            🐾 Pet<span>Love</span>
+        </a>
+
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#menu"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+        <div class="collapse navbar-collapse" id="menu">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">
+                        Início
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="produtos.html">
+                        Produtos
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="servicos.html">
+                        Serviços
+                    </a>
+                </li>
+
+                <li class="nav-item ms-lg-3">
+
+                    <a
+                        href="carrinho.html"
+                        class="btn btn-warning rounded-pill px-4 fw-bold"
+                    >
+                        <i class="bi bi-cart3"></i>
+                        Carrinho
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =====================================
+     CONTEÚDO
+===================================== -->
+
+<main class="container py-5">
+
+
+    <!-- TÍTULO -->
+
+    <section class="page-header">
+
+        <small>
+            Seu pedido
+        </small>
+
+        <h1>
+            Carrinho de compras 🛒
+        </h1>
+
+        <p>
+            Confira os produtos que você escolheu
+            antes de finalizar seu pedido.
+        </p>
+
+    </section>
+
+
+
+    <!-- =================================
+         CARRINHO
+    ================================== -->
+
+    <div class="row g-4">
+
+
+        <!-- PRODUTOS -->
+
+        <div class="col-lg-8">
+
+            <div class="cart-box">
+
+
+                <!-- PRODUTO 1 -->
+
+                <div class="cart-item">
+
+                    <div class="cart-image">
+
+                        <img
+                            src="https://images.tcdn.com.br/img/img_prod/1359908/atacao_original_25kg_14833_1_b18cd9bb055401fc1eedcedab56a92ce.jpeg"
+                            alt="Ração Premium"
+                        >
+
+                    </div>
+
+
+                    <div class="cart-info">
+
+                        <h3>
+                            Ração Premium
+                        </h3>
+
+                        <p>
+                            Alimentação completa para cães
+                        </p>
+
+                        <span class="cart-price">
+                            R$ 89,90
+                        </span>
+
+                    </div>
+
+
+                    <div class="quantity">
+
+                        <button>
+                            −
+                        </button>
+
+                        <span>
+                            1
+                        </span>
+
+                        <button>
+                            +
+                        </button>
+
+                    </div>
+
+
+                    <button
+                        class="remove-btn"
+                        title="Remover produto"
+                    >
+                        <i class="bi bi-trash"></i>
+                    </button>
+
+                </div>
+
+
+
+                <!-- PRODUTO 2 -->
+
+                <div class="cart-item">
+
+                    <div class="cart-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=800&q=85"
+                            alt="Brinquedo Interativo"
+                        >
+
+                    </div>
+
+
+                    <div class="cart-info">
+
+                        <h3>
+                            Brinquedo Interativo
+                        </h3>
+
+                        <p>
+                            Diversão e estímulo mental
+                        </p>
+
+                        <span class="cart-price">
+                            R$ 39,90
+                        </span>
+
+                    </div>
+
+
+                    <div class="quantity">
+
+                        <button>
+                            −
+                        </button>
+
+                        <span>
+                            1
+                        </span>
+
+                        <button>
+                            +
+                        </button>
+
+                    </div>
+
+
+                    <button
+                        class="remove-btn"
+                        title="Remover produto"
+                    >
+                        <i class="bi bi-trash"></i>
+                    </button>
+
+                </div>
+
+
+
+                <!-- PRODUTO 3 -->
+
+                <div class="cart-item">
+
+                    <div class="cart-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800&q=85"
+                            alt="Kit para Gatos"
+                        >
+
+                    </div>
+
+
+                    <div class="cart-info">
+
+                        <h3>
+                            Kit para Gatos
+                        </h3>
+
+                        <p>
+                            Acessórios para seu gatinho
+                        </p>
+
+                        <span class="cart-price">
+                            R$ 59,90
+                        </span>
+
+                    </div>
+
+
+                    <div class="quantity">
+
+                        <button>
+                            −
+                        </button>
+
+                        <span>
+                            1
+                        </span>
+
+                        <button>
+                            +
+                        </button>
+
+                    </div>
+
+
+                    <button
+                        class="remove-btn"
+                        title="Remover produto"
+                    >
+                        <i class="bi bi-trash"></i>
+                    </button>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================
+             RESUMO
+        ================================== -->
+
+        <div class="col-lg-4">
+
+            <div class="summary">
+
+                <h2>
+                    Resumo do pedido
+                </h2>
+
+
+                <div class="summary-line">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <span>
+                        R$ 189,70
+                    </span>
+
+                </div>
+
+
+                <div class="summary-line">
+
+                    <span>
+                        Frete
+                    </span>
+
+                    <span>
+                        R$ 15,00
+                    </span>
+
+                </div>
+
+
+                <div class="summary-line">
+
+                    <span>
+                        Desconto
+                    </span>
+
+                    <span class="text-success">
+                        - R$ 10,00
+                    </span>
+
+                </div>
+
+
+                <div class="summary-total">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <span>
+                        R$ 194,70
+                    </span>
+
+                </div>
+
+
+                <button
+                    class="checkout-btn"
+                    onclick="finalizarCompra()"
+                >
+                    Finalizar compra
+                    <i class="bi bi-arrow-right ms-2"></i>
+                </button>
+
+
+                <a
+                    href="produtos.html"
+                    class="continue-btn"
+                >
+                    <i class="bi bi-arrow-left me-1"></i>
+                    Continuar comprando
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</main>
+
+
+
+<!-- =====================================
+     FOOTER
+===================================== -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="row g-4">
+
+
+            <!-- SOBRE -->
+
+            <div class="col-md-5">
+
+                <h4>
+                    🐾 <strong>PetLove</strong>
+                </h4>
+
+                <p class="mt-3">
+                    Amor em cada detalhe para o seu
+                    melhor amigo. Produtos e cuidados
+                    para deixar seu pet feliz e saudável.
+                </p>
+
+            </div>
+
+
+
+            <!-- LINKS -->
+
+            <div class="col-md-3">
+
+                <h5 class="footer-title">
+                    Links rápidos
+                </h5>
+
+                <p class="mb-2">
+                    <a href="index.html">
+                        Início
+                    </a>
+                </p>
+
+                <p class="mb-2">
+                    <a href="produtos.html">
+                        Produtos
+                    </a>
+                </p>
+
+                <p class="mb-2">
+                    <a href="servicos.html">
+                        Serviços
+                    </a>
+                </p>
+
+                <p class="mb-2">
+                    <a href="carrinho.html">
+                        Carrinho
+                    </a>
+                </p>
+
+            </div>
+
+
+
+            <!-- REDES -->
+
+            <div class="col-md-4">
+
+                <h5 class="footer-title">
+                    Siga a PetLove
+                </h5>
+
+                <p>
+                    Acompanhe nossas novidades.
+                </p>
+
+                <a href="#" class="social-icon">
+                    <i class="bi bi-instagram"></i>
+                </a>
+
+                <a href="#" class="social-icon">
+                    <i class="bi bi-facebook"></i>
+                </a>
+
+                <a href="#" class="social-icon">
+                    <i class="bi bi-whatsapp"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <hr class="border-secondary my-4">
+
+
+        <div class="text-center">
+
+            <small>
+                © 2026 PetLove — Todos os direitos reservados.
+            </small>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================
+     JAVASCRIPT
+===================================== -->
+
+<script>
+
+    function finalizarCompra() {
+
+        alert(
+            "Obrigado pela sua compra! 🐾\n\n" +
+            "Esta é uma demonstração da PetLove."
+        );
+
+    }
+
+</script>
+
+
+<!-- Bootstrap JS -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PetLove | Produtos</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        :root {
+            --orange: #ff7a3d;
+            --orange-dark: #ef5d22;
+            --blue: #4263eb;
+            --green: #39b879;
+            --dark: #20252b;
+            --light: #f7f8fc;
+        }
+
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        /* ==========================
+           NAVBAR
+        ========================== */
+
+        .navbar {
+            background: rgba(255,255,255,.96);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 3px 20px rgba(0,0,0,.06);
+        }
+
+        .navbar-brand {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: var(--orange);
+        }
+
+        .navbar-brand span {
+            color: var(--blue);
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: #555;
+            margin-left: 20px;
+        }
+
+        .nav-link:hover {
+            color: var(--orange);
+        }
+
+        /* ==========================
+           HEADER
+        ========================== */
+
+        .page-header {
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,122,61,.95),
+                    rgba(66,99,235,.95)
+                );
+
+            border-radius: 30px;
+            padding: 60px 40px;
+            color: white;
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .page-header h1 {
+            font-size: clamp(2.3rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .page-header p {
+            max-width: 650px;
+            margin: auto;
+            color: rgba(255,255,255,.9);
+            line-height: 1.7;
+        }
+
+        /* ==========================
+           FILTERS
+        ========================== */
+
+        .filters {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,.06);
+            margin-bottom: 35px;
+        }
+
+        .filter-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .filter-btn {
+            border: 1px solid #ddd;
+            background: white;
+            color: #555;
+            border-radius: 50px;
+            padding: 8px 18px;
+            margin: 4px;
+            transition: .3s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--orange);
+            border-color: var(--orange);
+            color: white;
+        }
+
+        /* ==========================
+           PRODUCTS
+        ========================== */
+
+        .product-card {
+            background: white;
+            border-radius: 22px;
+            overflow: hidden;
+            height: 100%;
+            border: 1px solid #eee;
+            transition: .3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 35px rgba(0,0,0,.10);
+        }
+
+        .product-image {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: .5s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.07);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--orange);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 50px;
+            font-size: .72rem;
+            font-weight: 700;
+        }
+
+        .product-body {
+            padding: 22px;
+        }
+
+        .product-category {
+            color: var(--blue);
+            font-size: .78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .product-body h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+
+        .product-body p {
+            color: #888;
+            font-size: .9rem;
+            min-height: 45px;
+        }
+
+        .price {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--orange);
+        }
+
+        .cart-btn {
+            width: 45px;
+            height: 45px;
+            border: none;
+            border-radius: 50%;
+            background: var(--orange);
+            color: white;
+            transition: .3s;
+        }
+
+        .cart-btn:hover {
+            background: var(--orange-dark);
+            transform: scale(1.08);
+        }
+
+        /* ==========================
+           FOOTER
+        ========================== */
+
+        footer {
+            margin-top: 70px;
+            padding: 45px 0;
+            background: #20252b;
+            color: #bbb;
+        }
+
+        footer strong {
+            color: var(--orange);
+        }
+
+        footer a {
+            color: #bbb;
+            text-decoration: none;
+            transition: .3s;
+        }
+
+        footer a:hover {
+            color: var(--orange);
+        }
+
+        .footer-title {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,.08);
+            border-radius: 50%;
+            margin: 4px;
+            transition: .3s;
+        }
+
+        .social-icon:hover {
+            background: var(--orange);
+            color: white;
+        }
+
+        /* ==========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 768px) {
+
+            .page-header {
+                padding: 45px 25px;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .product-image {
+                height: 200px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================
+     NAVBAR
+===================================== -->
+
+<nav class="navbar navbar-expand-lg sticky-top">
+
+    <div class="container">
+
+        <a class="navbar-brand" href="index.html">
+            🐾 Pet<span>Love</span>
+        </a>
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#menu"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">
+                        Início
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="produtos.html">
+                        Produtos
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="servicos.html">
+                        Serviços
+                    </a>
+                </li>
+
+                <li class="nav-item ms-lg-3">
+
+                    <a
+                        href="carrinho.html"
+                        class="btn btn-warning rounded-pill px-4 fw-bold"
+                    >
+                        <i class="bi bi-cart3"></i>
+                        Carrinho
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =====================================
+     CONTEÚDO
+===================================== -->
+
+<main class="container py-5">
+
+
+    <!-- CABEÇALHO -->
+
+    <section class="page-header">
+
+        <h1>
+            Nossos produtos 🐾
+        </h1>
+
+        <p>
+            Tudo o que seu pet precisa em um só lugar.
+            Encontre alimentos, brinquedos, acessórios
+            e produtos especiais para cães e gatos.
+        </p>
+
+    </section>
+
+
+
+    <!-- FILTROS -->
+
+    <section class="filters">
+
+        <div class="filter-title">
+            <i class="bi bi-funnel me-2"></i>
+            Categorias
+        </div>
+
+        <div>
+
+            <button class="filter-btn active">
+                Todos
+            </button>
+
+            <a href="caes.html" class="filter-btn text-decoration-none d-inline-block">
+                🐶 Cães
+            </a>
+
+            <a href="gatos.html" class="filter-btn text-decoration-none d-inline-block">
+                🐱 Gatos
+            </a>
+
+            <button class="filter-btn">
+                🍖 Alimentação
+            </button>
+
+            <button class="filter-btn">
+                🧸 Brinquedos
+            </button>
+
+            <button class="filter-btn">
+                🛏️ Acessórios
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- PRODUTOS -->
+
+    <div class="row g-4">
+
+
+        <!-- PRODUTO 1 -->
+
+        <div class="col-sm-6 col-lg-4">
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.tcdn.com.br/img/img_prod/1359908/atacao_original_25kg_14833_1_b18cd9bb055401fc1eedcedab56a92ce.jpeg"
+                        alt="Ração Premium"
+                    >
+
+                    <span class="product-badge">
+                        MAIS VENDIDO
+                    </span>
+
+                </div>
+
+                <div class="product-body">
+
+                    <span class="product-category">
+                        Alimentação
+                    </span>
+
+                    <h3>
+                        Ração Premium
+                    </h3>
+
+                    <p>
+                        Alimentação completa e balanceada
+                        para cães.
+                    </p>
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <span class="price">
+                            R$ 89,90
+                        </span>
+
+                        <button class="cart-btn">
+                            <i class="bi bi-cart-plus"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PRODUTO 2 -->
+
+        <div class="col-sm-6 col-lg-4">
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=800&q=85"
+                        alt="Brinquedo para cachorro"
+                    >
+
+                    <span class="product-badge">
+                        NOVIDADE
+                    </span>
+
+                </div>
+
+                <div class="product-body">
+
+                    <span class="product-category">
+                        Brinquedos
+                    </span>
+
+                    <h3>
+                        Brinquedo Interativo
+                    </h3>
+
+                    <p>
+                        Diversão e estímulo mental
+                        para seu companheiro.
+                    </p>
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <span class="price">
+                            R$ 39,90
+                        </span>
+
+                        <button class="cart-btn">
+                            <i class="bi bi-cart-plus"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PRODUTO 3 -->
+
+        <div class="col-sm-6 col-lg-4">
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800&q=85"
+                        alt="Kit para gatos"
+                    >
+
+                    <span class="product-badge">
+                        OFERTA
+                    </span>
+
+                </div>
+
+                <div class="product-body">
+
+                    <span class="product-category">
+                        Gatos
+                    </span>
+
+                    <h3>
+                        Kit para Gatos
+                    </h3>
+
+                    <p>
+                        Acessórios para deixar
+                        seu gatinho confortável.
+                    </p>
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <span class="price">
+                            R$ 59,90
+                        </span>
+
+                        <button class="cart-btn">
+                            <i class="bi bi-cart-plus"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PRODUTO 4 -->
+
+        <div class="col-sm-6 col-lg-4">
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1589924691106-073b6c7c3d4b?auto=format&fit=crop&w=800&q=85"
+                        alt="Petiscos para cachorro"
+                    >
+
+                </div>
+
+                <div class="product-body">
+
+                    <span class="product-category">
+                        Alimentação
+                    </span>
+
+                    <h3>
+                        Petiscos Naturais
+                    </h3>
+
+                    <p>
+                        Deliciosos petiscos para
+                        recompensar seu pet.
+                    </p>
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <span class="price">
+                            R$ 24,90
+                        </span>
+
+                        <button class="cart-btn">
+                            <i class="bi bi-cart-plus"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PRODUTO 5 -->
+
+        <div class="col-sm-6 col-lg-4">
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1545249390-6bdfa286032f?auto=format&fit=crop&w=800&q=85"
+                        alt="Cama para cachorro"
+                    >
+
+                </div>
+
+                <div class="product-body">
+
+                    <span class="product-category">
+                        Acessórios
+                    </span>
+
+                    <h3>
+                        Cama Confortável
+                    </h3>
+
+                    <p>
+                        Conforto e descanso para
+                        seu melhor amigo.
+                    </p>
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <span class="price">
+                            R$ 119,90
+                        </span>
+
+                        <button class="cart-btn">
+                            <i class="bi bi-cart-plus"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PRODUTO 6 -->
+
+        <div class="col-sm-6 col-lg-4">
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&w=800&q=85"
+                        alt="Brinquedo para gato"
+                    >
+
+                    <span class="product-badge">
+                        NOVIDADE
+                    </span>
+
+                </div>
+
+                <div class="product-body">
+
+                    <span class="product-category">
+                        Gatos
+                    </span>
+
+                    <h3>
+                        Brinquedo para Gatos
+                    </h3>
+
+                    <p>
+                        Estimule seu gatinho com
+                        muita diversão.
+                    </p>
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <span class="price">
+                            R$ 29,90
+                        </span>
+
+                        <button class="cart-btn">
+                            <i class="bi bi-cart-plus"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+
+<!-- =====================================
+     FOOTER
+===================================== -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="row g-4">
+
+            <!-- SOBRE -->
+
+            <div class="col-md-5">
+
+                <h4>
+                    🐾 <strong>PetLove</strong>
+                </h4>
+
+                <p class="mt-3">
+                    Amor em cada detalhe para o seu
+                    melhor amigo. Produtos e cuidados
+                    para deixar seu pet feliz e saudável.
+                </p>
+
+            </div>
+
+
+            <!-- LINKS -->
+
+            <div class="col-md-3">
+
+                <h5 class="footer-title">
+                    Links rápidos
+                </h5>
+
+                <p class="mb-2">
+                    <a href="index.html">
+                        Início
+                    </a>
+                </p>
+
+                <p class="mb-2">
+                    <a href="produtos.html">
+                        Produtos
+                    </a>
+                </p>
+
+                <p class="mb-2">
+                    <a href="servicos.html">
+                        Serviços
+                    </a>
+                </p>
+
+                <p class="mb-2">
+                    <a href="carrinho.html">
+                        Carrinho
+                    </a>
+                </p>
+
+            </div>
+
+
+            <!-- REDES -->
+
+            <div class="col-md-4">
+
+                <h5 class="footer-title">
+                    Siga a PetLove
+                </h5>
+
+                <p>
+                    Acompanhe nossas novidades.
+                </p>
+
+                <a href="#" class="social-icon">
+                    <i class="bi bi-instagram"></i>
+                </a>
+
+                <a href="#" class="social-icon">
+                    <i class="bi bi-facebook"></i>
+                </a>
+
+                <a href="#" class="social-icon">
+                    <i class="bi bi-whatsapp"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <hr class="border-secondary my-4">
+
+
+        <div class="text-center">
+
+            <small>
+                © 2026 PetLove — Todos os direitos reservados.
+            </small>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- Bootstrap JS -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+</body>
+
+</html>

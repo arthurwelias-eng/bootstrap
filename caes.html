@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PetLove | Produtos para Cães</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        :root {
+            --orange: #ff7a3d;
+            --orange-dark: #ef5d22;
+            --blue: #4263eb;
+            --green: #39b879;
+            --dark: #20252b;
+            --light: #f7f8fc;
+        }
+
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: var(--light);
+            color: var(--dark);
+        }
+
+
+        /* ==========================
+           NAVBAR
+        ========================== */
+
+        .navbar {
+            background: rgba(255,255,255,.96);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 3px 20px rgba(0,0,0,.06);
+        }
+
+        .navbar-brand {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: var(--orange);
+        }
+
+        .navbar-brand span {
+            color: var(--blue);
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: #555;
+            margin-left: 20px;
+        }
+
+        .nav-link:hover {
+            color: var(--orange);
+        }
+
+
+        /* ==========================
+           HERO
+        ========================== */
+
+        .dog-hero {
+            min-height: 430px;
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+
+            background-image:
+                linear-gradient(
+                    90deg,
+                    rgba(15,20,25,.80),
+                    rgba(15,20,25,.35),
+                    rgba(15,20,25,.05)
+                ),
+                url("https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=1600&q=85");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .dog-hero-content {
+            min-height: 430px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            padding: 55px;
+            max-width: 700px;
+
+            color: white;
+        }
+
+        .hero-badge {
+            width: fit-content;
+
+            background: rgba(255,255,255,.18);
+            border: 1px solid rgba(255,255,255,.35);
+
+            backdrop-filter: blur(8px);
+
+            padding: 8px 16px;
+            border-radius: 50px;
+
+            margin-bottom: 20px;
+
+            font-size: .85rem;
+        }
+
+        .dog-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.2rem);
+            line-height: 1.05;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .dog-hero p {
+            color: rgba(255,255,255,.9);
+            line-height: 1.7;
+            margin-bottom: 0;
+        }
+
+
+        /* ==========================
+           SECTION TITLE
+        ========================== */
+
+        .section-title {
+            text-align: center;
+            margin: 60px 0 35px;
+        }
+
+        .section-title small {
+            color: var(--orange);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-top: 8px;
+        }
+
+        .section-title p {
+            color: #777;
+        }
+
+
+        /* ==========================
+           CATEGORY BUTTONS
+        ========================== */
+
+        .categories {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .category-btn {
+            display: inline-block;
+
+            padding: 10px 20px;
+            margin: 5px;
+
+            border-radius: 50px;
+
+            background: white;
+            border: 1px solid #ddd;
+
+            color: #555;
+            text-decoration: none;
+
+            font-weight: 600;
+
+            transition: .3s;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--orange);
+            border-color: var(--orange);
+            color: white;
+        }
+
+
+        /* ==========================
+           PRODUCT CARDS
+        ========================== */
+
+        .product-card {
+            background: white;
+            border-radius: 22px;
+            overflow: hidden;
+
+            height: 100%;
+
+            border: 1px solid #eee;
+
+            transition: .3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 35px rgba(0,0,0,.10);
+        }
+
+        .product-image {
+            height: 210px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            transition: .5s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.07);
+        }
+
+        .product-badge {
+            position: absolute;
+
+            top: 15px;
+            left: 15px;
+
+            background: var(--orange);
+            color: white;
+
+            padding: 6px 12px;
+
+            border-radius: 50px;
+
+            font-size: .72rem;
+            font-weight: 700;
+        }
+
+        .product-body {
+            padding: 22px;
+        }
+
+        .product-category {
+            color: var(--blue);
+
+            font-size: .75rem;
+            font-weight: 700;
+
+            text-transform: uppercase;
+        }
+
+        .product-body h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+
+            margin-top: 6px;
+        }
+
+        .product-body p {
+            color: #888;
+            font-size: .9rem;
+
+            min-height: 45px;
+        }
+
+        .price {
+            font-size: 1.3rem;
+            font-weight: 800;
+
+            color: var(--orange);
+        }
+
+        .cart-btn {
+            width: 44px;
+            height: 44px;
+
+            border: none;
+            border-radius: 50%;
+
+            background: var(--orange);
+            color: white;
+
+            transition: .3s;
+        }
+
+        .cart-btn:hover {
+            background: var(--orange-dark);
+            transform: scale(1.08);
+        }
+
+
+        /* ==========================
+           BENEFITS
+        ========================== */
+
+        .benefits {
+            margin-top: 65px;
+        }
+
+        .benefit-card {
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 25px;
+
+            height: 100%;
+
+            border: 1px solid #eee;
+
+            text-align: center;
+        }
+
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin: 0 auto 15px;
+
+            border-radius: 18px;
+
+            background: rgba(57,184,121,.12);
+            color: var(--green);
+
+            font-size: 1.6rem;
+        }
+
+        .benefit-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .benefit-card p {
+            color: #888;
+            font-size: .85rem;
+            margin-bottom: 0;
+        }
+
+
+        /* ==========================
+           FOOTER
+        ========================== */
+
+        footer {
+            margin-top: 70px;
+            padding: 45px 0;
+
+            background: #20252b;
+            color: #bbb;
+        }
+
+        footer strong {
+            color: var(--orange);
+        }
+
+        footer a {
+            color: #bbb;
+            text-decoration: none;
+            transition: .3s;
+        }
+
+        footer a:hover {
+            color: var(--orange);
+        }
+
+        .footer-title {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(255,255,255,.08);
+
+            border-radius: 50%;
+
+            margin: 4px;
+
+            transition: .3s;
+        }
+
+        .social-icon:hover {
+            background: var(--orange);
+            color: white;
+        }
+
+
+        /* ==========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 768px) {
+
+            .dog-hero {
+                min-height: 500px;
+                background-position: center;
+            }
+
+            .dog-hero-content {
+                min-height: 500px;
+                padding: 30px;
+            }
+
+            .dog-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .product-image {
+                height: 200px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================
+     NAVBAR
+===================================== -->
+
+<nav class="navbar navbar-expand-lg sticky-top">
+
+    <div class="container">
+
+        <a class="navbar-brand" href="index.html">
+            🐾 Pet<span>Love</span>
+        </a>
+
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#menu"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+        <div class="collapse navbar-collapse" id="menu">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="index.html"
+                    >
+                        Início
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="produtos.html"
+                    >
+                        Produtos
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="servicos.html"
+                    >
+                        Serviços
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item ms-lg-3">
+
+                    <a
+                        href="carrinho.html"
+                        class="btn btn-warning rounded-pill px-4 fw-bold"
+                    >
+
+                        <i class="bi bi-cart3"></i>
+
+                        Carrinho
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =====================================
+     CONTEÚDO
+===================================== -->
+
+<main class="container py-5">
+
+
+    <!-- =================================
+         HERO
+    ================================== -->
+
+    <section class="dog-hero">
+
+        <div class="dog-hero-content">
+
+            <div class="hero-badge">
+                🐶 Mundo dos cães
+            </div>
+
+            <h1>
+                Tudo para o seu
+                melhor amigo.
+            </h1>
+
+            <p>
+                Encontre rações, brinquedos, acessórios
+                e tudo o que seu cachorro precisa para
+                viver com mais conforto, saúde e diversão.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================
+         TÍTULO
+    ================================== -->
+
+    <div class="section-title">
+
+        <small>
+            Produtos para cães
+        </small>
+
+        <h2>
+            Escolha o melhor para ele 🐶
+        </h2>
+
+        <p>
+            Produtos selecionados para cuidar,
+            alimentar e divertir seu cachorro.
+        </p>
+
+    </div>
+
+
+
+    <!-- =================================
+         CATEGORIAS
+    ================================== -->
+
+    <div class="categories">
+
+        <a
+            href="caes.html"
+            class="category-btn active"
+        >
+            🐶 Todos
+        </a>
+
+        <a
+            href="produtos.html"
+            class="category-btn"
+        >
+            🍖 Alimentação
+        </a>
+
+        <a
+            href="produtos.html"
+            class="category-btn"
+        >
+            🧸 Brinquedos
+        </a>
+
+        <a
+            href="produtos.html"
+            class="category-btn"
+        >
+            🛏️ Acessórios
+        </a>
+
+        <a
+            href="gatos.html"
+            class="category-btn"
+        >
+            🐱 Gatos
+        </a>
+
+    </div>
+
+
+
+    <!-- =================================
+         PRODUTOS
+    ================================== -->
+
+    <div class="row g-4">
+
+
+        <!-- PRODUTO 1 -->
+
+        <div class="col-sm-6 col-lg-4">
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.tcdn.com.br/img/img_prod/1359908/atacao_original_25kg_14833_1_b18cd9bb055401fc1eedcedab56a92ce.jpeg"
+                        alt="Ração Premium para cães"
+                    >
+
+                    <span class="product-badge">
+                        MAIS VENDIDO
+                    </span>
+
+                </div>
+
+
+                <div class="product-body">
+
+                    <span class="product-category">
+                        Alimentação
+                    </span>
+
+                    <h3>
+                        Ração Premium
+                    </h3>
+
+                    <p>
+                        Alimentação completa e balanceada
+                        para cães.
+                    </p>
+
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <span class="price">
+                            R$ 89,90
+                        </span>
+
+                        <a
+                            href="carrinho.html"
+                            class="cart-btn d-flex align-items-center justify-content-center"
+                        >
+                            <i class="bi bi-cart-plus"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PRODUTO 2 -->
+
+        <div class="col-sm-6 col-lg-4">
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=800&q=85"
+                        alt="Brinquedo para cachorro"
+                    >
+
+                    <span class="product-badge">
+                        NOVIDADE
+                    </span>
+
+                </div>
+
+
+                <div class="product-body">
+
+                    <span class="product-category">
+                        Brinquedos
+                    </span>
+
+                    <h3>
+                        Brinquedo Interativo
+                    </h3>
+
+                    <p>
+                        Diversão e estímulo mental
+                        para seu companheiro.
+                    </p>
+
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <span class="price">
+                            R$ 39,90
+                        </span>
+
+                        <a
+                            href="carrinho.html"
+                            class="cart-btn d-flex align-items-center justify-content-center"
+                        >
+                            <i class="bi bi-cart-plus"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PRODUTO 3 -->
+
+        <div class="col-sm-6 col-lg-4">
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?auto=format&fit=crop&w=800&q=85"
+                        alt="Coleira para cachorro"
+                    >
+
+                    <span class="product-badge">
+                        OFERTA
+                    </span>
+
+                </div>
+
+
+                <div class="product-body">
+
+                    <span class="product-category">
+                        Acessórios
+                    </span>
+
+                    <h3>
+                        Coleira Confortável
+                    </h3>
+
+                    <p>
+                        Segurança e conforto para
+                        os passeios do seu cachorro.
+                    </p>
+
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <span class="price">
+                            R$ 34,90
+                        </span>
+
+                        <a
+                            href="carrinho.html"
+                            class="cart-btn d-flex align-items-center justify-content-center"
+                        >
+                            <i class="bi bi-cart-plus"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PRODUTO 4 -->
+
+        <div class="col-sm-6 col-lg-4">
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1589924691106-073b6c7c3d4b?auto=format&fit=crop&w=800&q=85"
+                        alt="Petiscos para cachorro"
+                    >
+
+                </div>
+
+
+                <div class="product-body">
+
+                    <span class="product-category">
+                        Alimentação
+                    </span>
+
+                    <h3>
+                        Petiscos Naturais
+                    </h3>
+
+                    <p>
+                        Petiscos deliciosos para
+                        recompensar seu pet.
+                    </p>
+
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <span class="price">
+                            R$ 24,90
+                        </span>
+
+                        <a
+                            href="carrinho.html"
+                            class="cart-btn d-flex align-items-center justify-content-center"
+                        >
+                            <i class="bi bi-cart-plus"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PRODUTO 5 -->
+
+        <div class="col-sm-6 col-lg-4">
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1545249390-6bdfa286032f?auto=format&fit=crop&w=800&q=85"
+                        alt="Cama para cachorro"
+                    >
+
+                </div>
+
+
+                <div class="product-body">
+
+                    <span class="product-category">
+                        Acessórios
+                    </span>
+
+                    <h3>
+                        Cama Confortável
+                    </h3>
+
+                    <p>
+                        Um espaço confortável para
+                        seu cachorro descansar.
+                    </p>
+
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <span class="price">
+                            R$ 119,90
+                        </span>
+
+                        <a
+                            href="carrinho.html"
+                            class="cart-btn d-flex align-items-center justify-content-center"
+                        >
+                            <i class="bi bi-cart-plus"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PRODUTO 6 -->
+
+        <div class="col-sm-6 col-lg-4">
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8?auto=format&fit=crop&w=800&q=85"
+                        alt="Brinquedo para cachorro"
+                    >
+
+                </div>
+
+
+                <div class="product-body">
+
+                    <span class="product-category">
+                        Brinquedos
+                    </span>
+
+                    <h3>
+                        Bola Divertida
+                    </h3>
+
+                    <p>
+                        Perfeita para brincadeiras
+                        e momentos de diversão.
+                    </p>
+
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <span class="price">
+                            R$ 19,90
+                        </span>
+
+                        <a
+                            href="carrinho.html"
+                            class="cart-btn d-flex align-items-center justify-content-center"
+                        >
+                            <i class="bi bi-cart-plus"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================
+         BENEFÍCIOS
+    ================================== -->
+
+    <section class="benefits">
+
+        <div class="section-title">
+
+            <small>
+                Para seu cachorro
+            </small>
+
+            <h2>
+                Tudo pensado para ele ❤️
+            </h2>
+
+        </div>
+
+
+        <div class="row g-4">
+
+
+            <div class="col-md-4">
+
+                <div class="benefit-card">
+
+                    <div class="benefit-icon">
+
+                        <i class="bi bi-heart-fill"></i>
+
+                    </div>
+
+                    <h3>
+                        Mais conforto
+                    </h3>
+
+                    <p>
+                        Produtos escolhidos pensando
+                        no bem-estar do seu cachorro.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="benefit-card">
+
+                    <div class="benefit-icon">
+
+                        <i class="bi bi-lightning-charge-fill"></i>
+
+                    </div>
+
+                    <h3>
+                        Mais diversão
+                    </h3>
+
+                    <p>
+                        Brinquedos para estimular
+                        e divertir seu melhor amigo.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="benefit-card">
+
+                    <div class="benefit-icon">
+
+                        <i class="bi bi-emoji-smile-fill"></i>
+
+                    </div>
+
+                    <h3>
+                        Mais felicidade
+                    </h3>
+
+                    <p>
+                        Tudo para deixar a rotina
+                        do seu pet ainda melhor.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================
+     FOOTER
+===================================== -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="row g-4">
+
+
+            <!-- SOBRE -->
+
+            <div class="col-md-5">
+
+                <h4>
+                    🐾 <strong>PetLove</strong>
+                </h4>
+
+                <p class="mt-3">
+                    Amor em cada detalhe para o seu
+                    melhor amigo. Produtos e cuidados
+                    para deixar seu pet feliz e saudável.
+                </p>
+
+            </div>
+
+
+
+            <!-- LINKS -->
+
+            <div class="col-md-3">
+
+                <h5 class="footer-title">
+                    Links rápidos
+                </h5>
+
+                <p class="mb-2">
+
+                    <a href="index.html">
+                        Início
+                    </a>
+
+                </p>
+
+                <p class="mb-2">
+
+                    <a href="produtos.html">
+                        Produtos
+                    </a>
+
+                </p>
+
+                <p class="mb-2">
+
+                    <a href="servicos.html">
+                        Serviços
+                    </a>
+
+                </p>
+
+                <p class="mb-2">
+
+                    <a href="carrinho.html">
+                        Carrinho
+                    </a>
+
+                </p>
+
+            </div>
+
+
+
+            <!-- REDES -->
+
+            <div class="col-md-4">
+
+                <h5 class="footer-title">
+                    Siga a PetLove
+                </h5>
+
+                <p>
+                    Acompanhe nossas novidades.
+                </p>
+
+
+                <a href="#" class="social-icon">
+
+                    <i class="bi bi-instagram"></i>
+
+                </a>
+
+
+                <a href="#" class="social-icon">
+
+                    <i class="bi bi-facebook"></i>
+
+                </a>
+
+
+                <a href="#" class="social-icon">
+
+                    <i class="bi bi-whatsapp"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <hr class="border-secondary my-4">
+
+
+        <div class="text-center">
+
+            <small>
+                © 2026 PetLove — Todos os direitos reservados.
+            </small>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- Bootstrap JS -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+</body>
+
+</html>
